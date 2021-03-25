@@ -44,16 +44,14 @@ public class UserController {
 	@Autowired
 	AuthenticationManager authManager;
 	
-	
-
-	
-	
-	
 	@Autowired
 	JwtUtil jwtUtil;
 	
 	@Autowired
 	MyUserDetailService myUserDetailService;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	
 
@@ -61,12 +59,12 @@ public class UserController {
 	public String addUser(@RequestBody User user) {
 		return userservice.addUser(user);
 	}
+	
 	@GetMapping("/users")
 	ResponseEntity<List<User>> getAllUser()
 	{
 		return new ResponseEntity<List<User>>(userservice.getAllUser(),HttpStatus.OK);
 	}
-	
 	
 	@PostMapping(value="/authenticate")
 	ResponseEntity<Token> createAuthenticate(@RequestBody AuthenticationRequest req) throws Exception
@@ -87,15 +85,6 @@ public class UserController {
 		return ResponseEntity.ok(new Token(token));
 				
 	}
-
-	
-	@Autowired
-	UserRepository userRepository;
-	
-	
-	
-          
-	
    
 	
 	@GetMapping("/users/{id}")
@@ -121,10 +110,5 @@ public class UserController {
 		return new ResponseEntity<Void>(userservice.deleteUser(id),HttpStatus.OK);
 	}
 	
-	
-	
-	
-
-
 
 }
