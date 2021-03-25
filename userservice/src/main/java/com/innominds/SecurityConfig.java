@@ -40,24 +40,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public UserDetailsService getUserDetailService() {
 		return new MyUserDetailService();
 	}
-	
-//	public DaoAuthenticationProvider authenticationprovider() {
-//		DaoAuthenticationProvider daoauthenticationprovider=new DaoAuthenticationProvider();
-//		 daoauthenticationprovider.setUserDetailsService(this.getUserDetailService());
-//		 daoauthenticationprovider.setPasswordEncoder(passwordEncoder());
-//		 return daoauthenticationprovider;
-//		 
-//		
-//	}
+	 
+		
 	@Autowired
  	private MyUserDetailService myUserDetailsService;
 
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.authenticationProvider(authenticationprovider());
 		auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder());
-//		auth.userDetailsService(myUserDetailsService);
 
 	}
 	@Autowired
